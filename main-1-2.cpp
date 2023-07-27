@@ -2,7 +2,7 @@
 using namespace std;
 double array_mean(int array[], int n);
 int main() {
-    int array[5] = {1,2,3,4,5};
+    int array[5] = {1,2,1,4,5};
     cout <<"The array is: ";
     for (int i=0;i<5;i++) {
         cout<<array[i]<<" ";
