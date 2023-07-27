@@ -11,10 +11,10 @@
             case 9:
                 count9++;
                 break;  
+            default:
+                break;
         }
     }
     // display the counts
-    cout<<"2:"<<count2;
-    cout<<";5:"<<count5;
-    cout<<";9:"<<count9;
+    cout<<"2:"<<count2<<";"<<"5:"<<count5<<";"<<"9:"<<count9<<";";
  }
