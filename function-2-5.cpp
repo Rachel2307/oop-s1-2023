@@ -1,5 +1,5 @@
 bool is_descending(int array[], int n) {
-    int result = true;
+    bool result = true;
     if(n <= 0) {
         result = false;
     }     
