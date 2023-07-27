@@ -7,6 +7,6 @@ int main() {
     for (int i=0;i<5;i++) {
         cout<<array[i]<<" ";
     }
-    cout<<"\nThe average is: "<<array_mean(array,5)<< endl;
+    cout<<"\nThe average is: " <<array_mean(array,5)<< endl;
     return 0;
 }
