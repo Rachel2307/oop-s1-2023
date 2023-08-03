@@ -1,12 +1,8 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-int array_sum(int array[], int n) ;
+int sum_diagonal(int array[4][4]);
 int main() {
-    int array1[6]= {1,2,3,4,5,6};
-    cout <<"The array is: ";
-    for (int i=0;i<6;i++) {
-        cout<<array1[i]<<" ";
-    }
-    cout<<"\nThe sum is: "<<array_sum(array1,6) << endl;
+    int testArray[4][4] = {{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4}};
+    cout<< "sum of the diagonal elements is: "<< sum_diagonal(testArray)<<endl;
     return 0;
 }
