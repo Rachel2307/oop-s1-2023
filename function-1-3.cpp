@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 void count_digits(int array[4][4]) {
+    // create an array to contain number of times each number 0-9 appears 
     int count[10]={0};
+    // count number of times numbers appears
     for (int i=0;i<4;i++) {
         for (int j=0;j<4;j++) {
             switch (array[i][j]) {
@@ -38,6 +40,7 @@ void count_digits(int array[4][4]) {
             }
         }
     }
+    // display result
     for (int i=0;i<10;i++) {
         cout<<i<<":"<<count[i]<<";";
     }
