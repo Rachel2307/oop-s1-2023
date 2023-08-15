@@ -3,7 +3,6 @@ using namespace std;
 int *readNumbers() {
     int* array = new int[10];
     for (int i=0;i<10;i++) {
-        cout<<"enter array["<<i<<"]"<<" : ";
         cin>>array[i];
     }
     return array;
