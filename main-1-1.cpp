@@ -1,14 +1,12 @@
 #include <iostream>
-#include "Person.h"
-using namespace std;
-Person* createPersonArray(int n);
+#include "Musician.h"
+
 int main() {
-    int n=5; // number of person structs
-    Person* peopleArray = createPersonArray(n);
-    for (int i=0; i<n;i++) {
-        cout<<"Person "<<i+1<<"; Name = "<< peopleArray[i].name<< "; Age = " << peopleArray[i].age << endl;
-    }
-    // free memory a;;pcated for the array
-    delete[] peopleArray;
-    return 0;
+Musician m1;
+std::cout << "Default instrument: " << m1.get_instrument() 
+          << ", Default experience: " << m1.get_experience() << std::endl;
+Musician m2("guitar", 5);
+std::cout << "Instrument: " << m2.get_instrument() << ", Experience: " <<
+m2.get_experience() << std::endl;
+return 0;
 }
