@@ -34,8 +34,6 @@ std::cout << "Could not add 4 " << std::endl;
 // print the number of stock items in the store
 std::cout << "The storre currently has " <<
 store.get_Total_Stock_Count() << " stock items" << std::endl;
-// check if orchestra has a specific instrument
-std::cout << "The store has: " << store.get_Stock_Count("hammer")<< "hammers"<<std::endl;
 // get the list of stock items in the store
 StockItem *items = store.get_Stock_List();
 // print the details of each musician
