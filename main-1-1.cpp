@@ -1,9 +1,24 @@
 #include <iostream>
-#include "StockItem.h"
+#include "player.h"
+#include "wizard.h"
+#include "warrior.h"
 using namespace std;
 int main() {
-    StockItem s1;
-    cout<<"1. code num = "<<s1.get_item_code()<<", description = "<<s1.get_description()<<endl;
-    StockItem s2(234,"t-shirt");
-    cout<<"2. code num = "<<s2.get_item_code()<<", description = "<<s2.get_description()<<endl;
+//Wizard(name, health, damage, mana)
+Wizard wizard("Gandalf", 100, 20, 50);
+//Warrior(name, health, damage, weapon)
+Warrior warrior("Aragorn", 120, 25, "Sword");
+cout << "Let the battle begin!" << endl;
+while (wizard.getHealth() > 0 && warrior.getHealth() > 0) {
+wizard.castSpell(&warrior);
+if (warrior.getHealth() > 0) {
+warrior.swingWeapon(&wizard);
+}
+}
+if (wizard.getHealth() > 0) {
+cout << wizard.getName() << " wins!" << endl;
+} else {
+cout << warrior.getName() << " wins!" << endl;
+}
+return 0;
 }
