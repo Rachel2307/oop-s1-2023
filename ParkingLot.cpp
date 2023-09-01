@@ -1,52 +1,54 @@
 #include "ParkingLot.h"
 #include <iostream>
 
-ParkingLot::ParkingLot(int capacity) : maxCapacity(capacity), currentCount(0) {
-    vehicles.resize(maxCapacity, nullptr);
+ParkingLot::ParkingLot(int capacity) : maxCapacity(capacity), vehicleCount(0) {
+    vehicles = new Vehicle*[maxCapacity];
 }
 
 ParkingLot::~ParkingLot() {
-    for (Vehicle* vehicle : vehicles) {
-        delete vehicle; // Free memory for parked vehicles
+    for (int i = 0; i < vehicleCount; ++i) {
+        delete vehicles[i];
     }
+    delete[] vehicles;
 }
 
 int ParkingLot::getCount() const {
-    return currentCount;
+    return vehicleCount;
 }
 
-void ParkingLot::parkVehicle(Vehicle* vehicle) {
-    if (currentCount < maxCapacity) {
-        for (int i = 0; i < maxCapacity; ++i) {
-            if (!vehicles[i]) {
-                vehicles[i] = vehicle;
-                currentCount++;
-                return;
-            }
-        }
+bool ParkingLot::parkVehicle(Vehicle* vehicle) {
+    if (vehicleCount < maxCapacity) {
+        vehicles[vehicleCount++] = vehicle;
+        return true;
+    } else {
+        std::cout << "The lot is full" << std::endl;
+        return false;
     }
-    std::cout << "The lot is full" << std::endl;
 }
 
 void ParkingLot::unparkVehicle(int id) {
-    for (int i = 0; i < maxCapacity; ++i) {
-        if (vehicles[i] && vehicles[i]->getID() == id) {
+    for (int i = 0; i < vehicleCount; ++i) {
+        if (vehicles[i]->getID() == id) {
             delete vehicles[i];
-            vehicles[i] = nullptr;
-            currentCount--;
+            for (int j = i; j < vehicleCount - 1; ++j) {
+                vehicles[j] = vehicles[j + 1];
+            }
+            --vehicleCount;
             return;
         }
     }
     std::cout << "Vehicle not in the lot" << std::endl;
 }
 
-
 int ParkingLot::countOverstayingVehicles(int maxParkingDuration) const {
-         int countOverstaying = 0;
-        for (int i = 0; i < currentCount; i++) {
-            if (vehicles[i]->getParkingDuration() > maxParkingDuration) {
-                countOverstaying++;
-            }
+    int count = 0;
+    std::time_t currentTime = std::time(nullptr);
+
+    for (int i = 0; i < vehicleCount; ++i) {
+        if (vehicles[i]->getParkingDuration() > maxParkingDuration) {
+            ++count;
         }
-        return countOverstaying;
     }
+
+    return count;
+}
