@@ -1,33 +1,50 @@
 #include <iostream>
-#include "ParkingLot.h"
+#include "Vehicle.h"
 #include "Car.h"
 #include "Bus.h"
 #include "Motorbike.h"
+#include "ParkingLot.h"
 
 int main() {
-    // Create a parking lot with a capacity of 10 vehicles
-    ParkingLot parkingLot(10);
+    ParkingLot parkingLot(10); // Create a parking lot with a capacity of 10
 
-    // Park 5 Car objects, 3 Bus objects, and 2 Motorbike objects
-    for (int i = 1; i <= 5; ++i) {
-        parkingLot.parkVehicle(new Car(i));
-    }
-    for (int i = 6; i <= 8; ++i) {
-        parkingLot.parkVehicle(new Bus(i));
-    }
-    for (int i = 9; i <= 10; ++i) {
-        parkingLot.parkVehicle(new Motorbike(i));
-    }
+    // Park vehicles in the parking lot until it's full
+    while (parkingLot.getCount() < 10) {
+        int choice;
+        std::cout << "Enter the type of vehicle to park (1: Car, 2: Bus, 3: Motorbike): ";
+        std::cin >> choice;
 
-    // Count the number of overstaying vehicles
-    int overstayingCount = parkingLot.countOverStayingVehicles(15);
-    std::cout << "Number of overstaying vehicles: " << overstayingCount << std::endl;
+        Vehicle* vehicle = nullptr;
+
+        switch (choice) {
+            case 1:
+                vehicle = new Car(parkingLot.getCount() + 1);
+                break;
+            case 2:
+                vehicle = new Bus(parkingLot.getCount() + 1);
+                break;
+            case 3:
+                vehicle = new Motorbike(parkingLot.getCount() + 1);
+                break;
+            default:
+                std::cout << "Invalid choice" << std::endl;
+                continue;
+        }
+
+        parkingLot.parkVehicle(vehicle);
+        std::cout << "Vehicle ID " << vehicle->getID() << " parked." << std::endl;
+    }
 
     // Unpark a vehicle
     int idToUnpark;
     std::cout << "Enter the ID of the vehicle to unpark: ";
     std::cin >> idToUnpark;
     parkingLot.unparkVehicle(idToUnpark);
+
+    // Count overstaying vehicles
+    int maxParkingDuration = 15; // in seconds
+    int overstayingCount = parkingLot.countOverstayingVehicles(maxParkingDuration);
+    std::cout << "Number of vehicles overstaying for more than " << maxParkingDuration << " seconds: " << overstayingCount << std::endl;
 
     return 0;
 }
