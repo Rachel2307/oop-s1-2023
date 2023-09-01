@@ -4,9 +4,10 @@
 #include "Vehicle.h"
 
 class Bus : public Vehicle {
-public:
-    Bus(int id);
-    int getParkingDuration() const;
+ public:
+  Bus(int id);
+  Bus(int id, std::time_t timeOfEntry);
+  int getParkingDuration() const;
 };
 
 #endif

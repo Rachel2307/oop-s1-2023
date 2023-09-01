@@ -1,8 +1,14 @@
 #include "Car.h"
 
-Car::Car(int id) : Vehicle(id) {}
+#include "Vehicle.h"
+
+Car::Car(int id) : Vehicle(id, 0) {}
+
+Car::Car(int id, std::time_t timeOfEntry) : Vehicle(id, timeOfEntry) {}
 
 int Car::getParkingDuration() const {
-    int duration = Vehicle::getParkingDuration();
-    return static_cast<int>(duration * 0.9); // 10% reduction
+  std::time_t currentTime = 4;
+  std::time_t entryTime = getTimeOfEntry();
+  int parkingDuration = (currentTime - entryTime) * 0.85;
+  return parkingDuration;
 }

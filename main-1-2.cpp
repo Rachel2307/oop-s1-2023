@@ -1,45 +1,46 @@
 #include <iostream>
-#include "Vehicle.h"
-#include "Car.h"
+
 #include "Bus.h"
+#include "Car.h"
 #include "Motorbike.h"
 #include "ParkingLot.h"
 
 int main() {
-    ParkingLot parkingLot(10); // Create a parking lot with a capacity of 10
+  ParkingLot parkingLot(10);
 
-    // Park vehicles in the parking lot until it's full
-    while (parkingLot.getCount() < 10) {
-        int choice;
-        std::cout << "Enter the type of vehicle to park (1: Car, 2: Bus, 3: Motorbike): ";
-        std::cin >> choice;
+  char vehicleType;
 
-        Vehicle* vehicle = nullptr;
+  do {
+    std::cout
+        << "Enter your vehicle type (C for car, B for bus, M for motorbike, Q "
+           "to quit): ";
+    std::cin >> vehicleType;
 
-        switch (choice) {
-            case 1:
-                vehicle = new Car(parkingLot.getCount() + 1);
-                break;
-            case 2:
-                vehicle = new Bus(parkingLot.getCount() + 1);
-                break;
-            case 3:
-                vehicle = new Motorbike(parkingLot.getCount() + 1);
-                break;
-            default:
-                std::cout << "Invalid choice" << std::endl;
-                continue;
-        }
+    if (vehicleType == 'C' || vehicleType == 'B' || vehicleType == 'M') {
+      Vehicle* vehicle = nullptr;
+      int id;
+      std::time_t parkingDuration;
+      std::cout << "Enter vehicle ID: ";
+      std::cin >> id;
+      std::cout << "Enter parking duration (in seconds): ";
+      std::cin >> parkingDuration;
 
-        parkingLot.parkVehicle(vehicle);
-        std::cout << "Vehicle ID " << vehicle->getID() << " parked." << std::endl;
+      if (vehicleType == 'C') {
+        vehicle = new Car(id, parkingDuration);
+      } else if (vehicleType == 'B') {
+        vehicle = new Bus(id, parkingDuration);
+      } else if (vehicleType == 'M') {
+        vehicle = new Motorbike(id, parkingDuration);
+      }
+
+      parkingLot.parkVehicle(vehicle);
     }
+  } while (vehicleType != 'Q');
 
-    // Unpark a vehicle
-    int idToUnpark;
-    std::cout << "Enter the ID of the vehicle to unpark: ";
-    std::cin >> idToUnpark;
-    parkingLot.unparkVehicle(idToUnpark);
+  int unparkID;
+  std::cout << "Enter ID of vehicle to unpark: ";
+  std::cin >> unparkID;
+  parkingLot.unparkVehicle(unparkID);
 
-    return 0;
+  return 0;
 }

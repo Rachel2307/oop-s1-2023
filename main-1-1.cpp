@@ -1,45 +1,46 @@
 #include <iostream>
 #include <vector>
-#include "Car.h"
+
 #include "Bus.h"
+#include "Car.h"
 #include "Motorbike.h"
+#include "Vehicle.h"
+
 int main() {
-    int numCars, numBuses, numMotorbikes;
-    std::cout << "Enter number of cars: ";
-    std::cin >> numCars;
-    std::cout << "Enter number of buses: ";
-    std::cin >> numBuses;
-    std::cout << "Enter number of motorbikes: ";
-    std::cin >> numMotorbikes;
+  std::vector<Vehicle*> vehicles;
 
-    const int totalVehicles = numCars + numBuses + numMotorbikes;
-    Vehicle* vehicles[totalVehicles];
-    int vehicleCount = 0;
+  int id;
+  std::time_t parkingDuration = 0;
 
-    for (int i = 0; i < numCars; i++) {
-        int id;
-        std::cout << "Enter car ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Car(id);
-    }
-    for (int i = 0; i < numBuses; i++) {
-        int id;
-        std::cout << "Enter bus ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Bus(id);
-    }
-    for (int i = 0; i < numMotorbikes; i++) {
-        int id;
-        std::cout << "Enter motorbike ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Motorbike(id);
-    }
+  char vehicleType;
 
-    for (int i = 0; i < totalVehicles; i++) {
-        std::cout << "Vehicle " << vehicles[i]->getID() << " parked for "
-                  << vehicles[i]->getParkingDuration() << " seconds\n";
-        delete vehicles[i];
-    }
+  do {
+    std::cout
+        << "Enter your vehicle type (C for car, B for bus, M for motorbike, Q "
+           "to quit): ";
+    std::cin >> vehicleType;
 
-    return 0;
+    if (vehicleType == 'C') {
+      std::cout << "Enter vehicle ID: ";
+      std::cin >> id;
+      vehicles.push_back(new Car(id, parkingDuration));
+    } else if (vehicleType == 'B') {
+      std::cout << "Enter vehicle ID: ";
+      std::cin >> id;
+      vehicles.push_back(new Bus(id, parkingDuration));
+    } else if (vehicleType == 'M') {
+      std::cout << "Enter vehicle ID: ";
+      std::cin >> id;
+      vehicles.push_back(new Motorbike(id, parkingDuration));
+    }
+  } while (vehicleType != 'Q');
+
+  for (const auto vehicle : vehicles) {
+    std::cout << "Vehicle ID: " << vehicle->getID()
+              << ", Parking Duration: " << vehicle->getTimeOfEntry()
+              << " seconds" << std::endl;
+    delete vehicle;
+  }
+
+  return 0;
 }
