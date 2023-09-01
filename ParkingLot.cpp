@@ -48,3 +48,16 @@ int ParkingLot::getCount() const
 {
     return count;
 }
+
+int ParkingLot::countOverstayingVehicles(int maxParkingDuration) const {
+    int count = 0;
+    std::time_t currentTime = std::time(nullptr);
+
+    for (int i = 0; i < count; ++i) {
+        int parkingDuration = static_cast<int>(currentTime - vehicles[i]->getParkingDuration());
+        if (parkingDuration > maxParkingDuration) {
+            count++;
+        }
+    }
+    return count;
+}

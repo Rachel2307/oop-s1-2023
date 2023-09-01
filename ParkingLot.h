@@ -15,6 +15,7 @@ private:
     int maxCapacity;
     int count;
     Vehicle** vehicles;
+    int countOverstayingVehicles(int maxParkingDuration) const;
 };
 
 #endif
