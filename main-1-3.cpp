@@ -38,10 +38,10 @@ int main() {
     }
 
     int maxParkingDuration = 15; // Maximum allowed parking duration in seconds
-    int overstayingCount = parkingLot.countOverstayingVehicles(maxParkingDuration);
+    //int overstayingCount = parkingLot.countOverstayingVehicles(maxParkingDuration);
 
-    std::cout << "Number of vehicles overstaying for more than " << maxParkingDuration << " seconds: "
-              << overstayingCount << std::endl;
+    //std::cout << "Number of vehicles overstaying for more than " << maxParkingDuration << " seconds: "
+             // << overstayingCount << std::endl;
 
     return 0;
 }
