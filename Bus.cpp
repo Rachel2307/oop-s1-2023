@@ -1,8 +1,8 @@
-#include "Bus.h"
+#include "bus.h"
 
 Bus::Bus(int id) : Vehicle(id) {}
 
 int Bus::getParkingDuration() const {
-    int duration = Vehicle::getParkingDuration();
-    return static_cast<int>(duration * 0.75); // 25% reduction
+    int baseDuration = Vehicle::getParkingDuration();
+    return static_cast<int>(baseDuration * 0.75); // 25% reduction
 }

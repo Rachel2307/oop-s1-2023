@@ -1,13 +1,14 @@
-#include "Vehicle.h"
+#include "vehicle.h"
 
-Vehicle::Vehicle(int id):ID(id) {
-    timeOfEntry = std::time(NULL);
+Vehicle::Vehicle(int id) : ID(id) {
+    timeOfEntry = std::time(nullptr);
 }
+
 int Vehicle::getID() const {
     return ID;
 }
 
 int Vehicle::getParkingDuration() const {
-    std::time_t now = std::time(NULL);
-    return difftime(now, timeOfEntry);
+    std::time_t currentTime = std::time(nullptr);
+    return static_cast<int>(currentTime - timeOfEntry);
 }

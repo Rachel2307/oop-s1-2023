@@ -1,44 +1,46 @@
 #include <iostream>
 #include <vector>
-#include "Car.h"
-#include "Bus.h"
-#include "Motorbike.h"
+#include "vehicle.h"
+#include "car.h"
+#include "bus.h"
+#include "motorbike.h"
+
 int main() {
+    std::vector<Vehicle*> vehicles;
+
     int numCars, numBuses, numMotorbikes;
-    std::cout << "Enter number of cars: ";
+    
+    std::cout << "Enter the number of cars: ";
     std::cin >> numCars;
-    std::cout << "Enter number of buses: ";
+
+    std::cout << "Enter the number of buses: ";
     std::cin >> numBuses;
-    std::cout << "Enter number of motorbikes: ";
+
+    std::cout << "Enter the number of motorbikes: ";
     std::cin >> numMotorbikes;
 
-    const int totalVehicles = numCars + numBuses + numMotorbikes;
-    Vehicle* vehicles[totalVehicles];
-    int vehicleCount = 0;
-
-    for (int i = 0; i < numCars; i++) {
-        int id;
-        std::cout << "Enter car ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Car(id);
-    }
-    for (int i = 0; i < numBuses; i++) {
-        int id;
-        std::cout << "Enter bus ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Bus(id);
-    }
-    for (int i = 0; i < numMotorbikes; i++) {
-        int id;
-        std::cout << "Enter motorbike ID: ";
-        std::cin >> id;
-        vehicles[vehicleCount++] = new Motorbike(id);
+    // Create and store vehicles
+    for (int i = 1; i <= numCars; ++i) {
+        vehicles.push_back(new Car(i));
     }
 
-    for (int i = 0; i < totalVehicles; i++) {
-        std::cout << "Vehicle " << vehicles[i]->getID() << " parked for "
-                  << vehicles[i]->getParkingDuration() << " seconds\n";
-        delete vehicles[i];
+    for (int i = 1; i <= numBuses; ++i) {
+        vehicles.push_back(new Bus(i));
+    }
+
+    for (int i = 1; i <= numMotorbikes; ++i) {
+        vehicles.push_back(new Motorbike(i));
+    }
+
+    // Print parking durations
+    for (const Vehicle* vehicle : vehicles) {
+        std::cout << "Vehicle ID: " << vehicle->getID()
+                  << ", Parking Duration: " << vehicle->getParkingDuration() << " seconds" << std::endl;
+    }
+
+    // Clean up allocated memory
+    for (Vehicle* vehicle : vehicles) {
+        delete vehicle;
     }
 
     return 0;
