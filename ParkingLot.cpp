@@ -1,63 +1,55 @@
-#include <iostream>
 #include "ParkingLot.h"
 
+#include <iostream>
+
 ParkingLot::ParkingLot(int maxCapacity)
-    : maxCapacity(maxCapacity), count(0)
-{
-    vehicles = new Vehicle*[maxCapacity];
+    : maxCapacity(maxCapacity), vehicleCount(0) {
+  vehicles = new Vehicle*[maxCapacity];
+  for (int i = 0; i < maxCapacity; i++) {
+    vehicles[i] = nullptr;
+  }
 }
 
-ParkingLot::~ParkingLot()
-{
-    for (int i = 0; i < count; i++) {
-        delete vehicles[i];
-    }
-    delete[] vehicles;
+ParkingLot::~ParkingLot() {
+  for (int i = 0; i < vehicleCount; i++) {
+    delete vehicles[i];
+  }
+  delete[] vehicles;
 }
 
-void ParkingLot::parkVehicle(Vehicle* vehicle)
-{
-    if (count >= maxCapacity) {
-        std::cout << "The lot is full" << std::endl;
-        return;
-    }
-    vehicles[count++] = vehicle;
+int ParkingLot::getCount() const { return vehicleCount; }
+
+void ParkingLot::parkVehicle(Vehicle* vehicle) {
+  if (vehicleCount < maxCapacity) {
+    vehicles[vehicleCount] = vehicle;
+    vehicleCount++;
+  } else {
+    std::cout << "The lot is full" << std::endl;
+  }
 }
 
-void ParkingLot::unparkVehicle(int id)
-{
-    int index = -1;
-    for (int i = 0; i < count; i++) {
-        if (vehicles[i]->getID() == id) {
-            index = i;
-            break;
-        }
+void ParkingLot::unparkVehicle(int id) {
+  for (int i = 0; i < vehicleCount; i++) {
+    if (vehicles[i]->getID() == id) {
+      delete vehicles[i];
+      vehicles[i] = vehicles[vehicleCount - 1];
+      vehicles[vehicleCount - 1] = nullptr;
+      vehicleCount--;
+      return;
     }
-    if (index == -1) {
-        std::cout << "Vehicle not in the lot" << std::endl;
-        return;
-    }
-    delete vehicles[index];
-    count--;
-    for (int i = index; i < count; i++) {
-        vehicles[i] = vehicles[i+1];
-    }
-}
-
-int ParkingLot::getCount() const
-{
-    return count;
+  }
+  std::cout << "Vehicle not in the lot" << std::endl;
 }
 
 int ParkingLot::countOverstayingVehicles(int maxParkingDuration) const {
-    int count = 0;
-    std::time_t currentTime = std::time(nullptr);
+  int count = 0;
+  std::time_t currentTime = std::time(nullptr);
 
-    for (int i = 0; i < count; ++i) {
-        int parkingDuration = static_cast<int>(currentTime - vehicles[i]->getParkingDuration());
-        if (parkingDuration > maxParkingDuration) {
-            count++;
-        }
+  for (int i = 0; i < vehicleCount; i++) {
+    if (vehicles[i]->getParkingDuration() > maxParkingDuration) {
+      count++;
     }
-    return count;
+  }
+
+  return count;
 }
