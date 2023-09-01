@@ -4,17 +4,17 @@
 #include "Vehicle.h"
 
 class ParkingLot {
+public:
+    ParkingLot(int maxCapacity);
+    ~ParkingLot();
+    void parkVehicle(Vehicle* vehicle);
+    void unparkVehicle(int id);
+    int getCount() const;
+
 private:
     int maxCapacity;
     int count;
     Vehicle** vehicles;
-
-public:
-    ParkingLot(int capacity);
-    ~ParkingLot();
-    int getCount() const;
-    void parkVehicle(Vehicle* vehicle);
-    void unparkVehicle(int id);
 };
 
 #endif

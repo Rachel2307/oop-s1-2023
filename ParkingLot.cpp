@@ -1,44 +1,50 @@
-#include "ParkingLot.h"
 #include <iostream>
+#include "ParkingLot.h"
 
-ParkingLot::ParkingLot(int capacity) : maxCapacity(capacity), count(0) {
+ParkingLot::ParkingLot(int maxCapacity)
+    : maxCapacity(maxCapacity), count(0)
+{
     vehicles = new Vehicle*[maxCapacity];
 }
 
-ParkingLot::~ParkingLot() {
-    for (int i = 0; i < count; ++i) {
+ParkingLot::~ParkingLot()
+{
+    for (int i = 0; i < count; i++) {
         delete vehicles[i];
     }
     delete[] vehicles;
 }
 
-int ParkingLot::getCount() const {
-    return count;
-}
-
-void ParkingLot::parkVehicle(Vehicle* vehicle) {
-    if (count < maxCapacity) {
-        vehicles[count] = vehicle;
-        count++;
-    } else {
+void ParkingLot::parkVehicle(Vehicle* vehicle)
+{
+    if (count >= maxCapacity) {
         std::cout << "The lot is full" << std::endl;
+        return;
     }
+    vehicles[count++] = vehicle;
 }
 
-void ParkingLot::unparkVehicle(int id) {
-    for (int i = 0; i < count; ++i) {
+void ParkingLot::unparkVehicle(int id)
+{
+    int index = -1;
+    for (int i = 0; i < count; i++) {
         if (vehicles[i]->getID() == id) {
-            delete vehicles[i];
-            count--;
-
-            // Shift the remaining vehicles in the array
-            for (int j = i; j < count; ++j) {
-                vehicles[j] = vehicles[j + 1];
-            }
-
-            std::cout << "Vehicle with ID " << id << " has been removed from the lot." << std::endl;
-            return;
+            index = i;
+            break;
         }
     }
-    std::cout << "Vehicle not in the lot" << std::endl;
+    if (index == -1) {
+        std::cout << "Vehicle not in the lot" << std::endl;
+        return;
+    }
+    delete vehicles[index];
+    count--;
+    for (int i = index; i < count; i++) {
+        vehicles[i] = vehicles[i+1];
+    }
+}
+
+int ParkingLot::getCount() const
+{
+    return count;
 }

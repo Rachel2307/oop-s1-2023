@@ -1,46 +1,45 @@
 #include <iostream>
-#include "parkinglot.h"
-#include "car.h"
-#include "bus.h"
-#include "motorbike.h"
+#include "Vehicle.h"
+#include "Car.h"
+#include "Bus.h"
+#include "Motorbike.h"
+#include "ParkingLot.h"
 
 int main() {
-    ParkingLot parkingLot(10);
+    ParkingLot parkingLot(10); // Create a parking lot with a capacity of 10
 
+    // Park vehicles in the parking lot until it's full
     while (parkingLot.getCount() < 10) {
-        int vehicleType;
-        std::cout << "Enter the type of vehicle (1 for Car, 2 for Bus, 3 for Motorbike): ";
-        std::cin >> vehicleType;
+        int choice;
+        std::cout << "Enter the type of vehicle to park (1: Car, 2: Bus, 3: Motorbike): ";
+        std::cin >> choice;
 
-        int vehicleID;
-        std::cout << "Enter the vehicle ID: ";
-        std::cin >> vehicleID;
+        Vehicle* vehicle = nullptr;
 
-        Vehicle* newVehicle = nullptr;
-
-        switch (vehicleType) {
+        switch (choice) {
             case 1:
-                newVehicle = new Car(vehicleID);
+                vehicle = new Car(parkingLot.getCount() + 1);
                 break;
             case 2:
-                newVehicle = new Bus(vehicleID);
+                vehicle = new Bus(parkingLot.getCount() + 1);
                 break;
             case 3:
-                newVehicle = new Motorbike(vehicleID);
+                vehicle = new Motorbike(parkingLot.getCount() + 1);
                 break;
             default:
-                std::cout << "Invalid vehicle type." << std::endl;
+                std::cout << "Invalid choice" << std::endl;
                 continue;
         }
 
-        parkingLot.parkVehicle(newVehicle);
+        parkingLot.parkVehicle(vehicle);
+        std::cout << "Vehicle ID " << vehicle->getID() << " parked." << std::endl;
     }
 
-    int unparkID;
+    // Unpark a vehicle
+    int idToUnpark;
     std::cout << "Enter the ID of the vehicle to unpark: ";
-    std::cin >> unparkID;
-
-    parkingLot.unparkVehicle(unparkID);
+    std::cin >> idToUnpark;
+    parkingLot.unparkVehicle(idToUnpark);
 
     return 0;
 }
