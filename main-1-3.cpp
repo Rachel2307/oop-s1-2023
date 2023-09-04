@@ -1,47 +1,49 @@
+#include <ctime>
 #include <iostream>
-#include "ParkingLot.h"
-#include "Vehicle.h"
-#include "Car.h"
+
 #include "Bus.h"
+#include "Car.h"
 #include "Motorbike.h"
+#include "ParkingLot.h"
 
 int main() {
-    ParkingLot parkingLot(10);
+  ParkingLot parkingLot(10);
 
-    while (parkingLot.getCount() < 10) {
-        int vehicleType;
-        std::cout << "Enter the type of vehicle (1 for Car, 2 for Bus, 3 for Motorbike): ";
-        std::cin >> vehicleType;
+  char vehicleType;
 
-        int vehicleID;
-        std::cout << "Enter the vehicle ID: ";
-        std::cin >> vehicleID;
+  do {
+    std::cout
+        << "Enter your vehicle type (C for car, B for bus, M for motorbike, Q "
+           "to quit): ";
+    std::cin >> vehicleType;
+    if (vehicleType == 'C' || vehicleType == 'B' || vehicleType == 'M') {
+      Vehicle* vehicle = nullptr;
+      int id;
+      std::time_t parkingDuration;
+      std::cout << "Enter vehicle ID: ";
+      std::cin >> id;
+      std::cout << "Enter parking duration (in seconds): ";
+      std::cin >> parkingDuration;
 
-        Vehicle* newVehicle = nullptr;
+      if (vehicleType == 'C') {
+        vehicle = new Car(id, parkingDuration);
+      } else if (vehicleType == 'B') {
+        vehicle = new Bus(id, parkingDuration);
+      } else if (vehicleType == 'M') {
+        vehicle = new Motorbike(id, parkingDuration);
+      }
 
-        switch (vehicleType) {
-            case 1:
-                newVehicle = new Car(vehicleID);
-                break;
-            case 2:
-                newVehicle = new Bus(vehicleID);
-                break;
-            case 3:
-                newVehicle = new Motorbike(vehicleID);
-                break;
-            default:
-                std::cout << "Invalid vehicle type." << std::endl;
-                continue;
-        }
-
-        parkingLot.parkVehicle(newVehicle);
+      parkingLot.parkVehicle(vehicle);
     }
+  } while (vehicleType != 'Q');
 
-    int maxParkingDuration = 15; // Maximum allowed parking duration in seconds
-    //int overstayingCount = parkingLot.countOverstayingVehicles(maxParkingDuration);
+  int maxParkingDuration = 15;
+  int overstayingCount =
+      parkingLot.countOverstayingVehicles(maxParkingDuration);
 
-    //std::cout << "Number of vehicles overstaying for more than " << maxParkingDuration << " seconds: "
-             // << overstayingCount << std::endl;
+  std::cout << "Number of vehicles overstaying for more than "
+            << maxParkingDuration << " seconds: " << overstayingCount
+            << std::endl;
 
-    return 0;
+  return 0;
 }
