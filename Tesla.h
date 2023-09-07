@@ -16,10 +16,11 @@ public:
     void chargeBattery(int mins);
     void drive(int kms);
 
-    virtual ~Tesla(); // Virtual destructor for polymorphism
 private:
     char model;
     float batteryPercentage;
 };
 
-#endif // TESLA_H
+#endif // TESLA_H 
+
+
