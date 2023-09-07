@@ -39,6 +39,12 @@ void Tesla::drive(int kms) {
     while (kms > 0 && batteryPercentage > 0.0) {
         Car::drive(1); // Use the drive method from the base Car class
         batteryPercentage -= 1.0 / 5; // 1% battery per 5 km
+
+        // Ensure battery percentage does not go below 0
+        if (batteryPercentage < 0.0) {
+            batteryPercentage = 0.0;
+        }
+
         kms--;
     }
 }
