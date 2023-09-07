@@ -9,9 +9,8 @@ public:
     int get_price() const;
     int get_emissions() const;
     void set_price(int price);
-    void drive(int kms);
+    virtual void drive(int kms);
 
-    virtual ~Car(); // Virtual destructor for polymorphism
 private:
     int price;
     int emissions;

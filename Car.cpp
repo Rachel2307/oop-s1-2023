@@ -20,4 +20,3 @@ void Car::drive(int kms) {
     emissions += 20 * kms;
 }
 
-Car::~Car() {} // Destructor definition (can be left empty in this case)
