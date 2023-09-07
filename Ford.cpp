@@ -28,9 +28,16 @@ void Ford::refuel(int litres) {
 }
 
 void Ford::drive(int kms) {
-    while (kms > 0 && litresOfFuel > 0.0) {
-        Car::drive(1); // Call the drive method from the Car class
-        litresOfFuel -= 1.0 / 5.0; // Consume 1L of fuel for every 5km driven
-        kms--;
+    float co2Emissions = 234.0 * kms;
+    Car::drive(kms);
+    if (litresOfFuel >= 5.0) {
+        litresOfFuel -= static_cast<float>(kms) / 5.0;
+        if (litresOfFuel < 0.0)
+            litresOfFuel = 0.0;
     }
+    else {
+        litresOfFuel = 0.0;
+        co2Emissions += 234.0 * litresOfFuel;
+    }
+    set_emissions(get_emissions() + static_cast<int>(co2Emissions));
 }
