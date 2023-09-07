@@ -35,16 +35,14 @@ void Tesla::chargeBattery(int mins) {
 
 void Tesla::drive(int kms) {
     float co2Emissions = 74.0 * kms;
-    Car::drive(kms);
     if (batteryPercentage >= 1.0) {
         batteryPercentage -= static_cast<float>(kms) / 5.0;
         if (batteryPercentage < 0.0)
             batteryPercentage = 0.0;
     }
     else {
+        co2Emissions += 74.0 * (kms * 0.01); // CO2 from electricity generation
         batteryPercentage = 0.0;
-        co2Emissions += 74.0 * batteryPercentage;
     }
     set_emissions(get_emissions() + static_cast<int>(co2Emissions));
 }
-
