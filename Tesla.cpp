@@ -26,7 +26,7 @@ void Tesla::set_batteryPercentage(float batteryPercentage) {
 }
 
 void Tesla::chargeBattery(int mins) {
-    float percentageToAdd = 0.5 * mins / 60.0;
+    float percentageToAdd = 0.5 * mins ;
     if (batteryPercentage + percentageToAdd > 100.0)
         batteryPercentage = 100.0;
     else
