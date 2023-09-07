@@ -4,6 +4,9 @@
 #include "Car.h"
 
 class Tesla : public Car {
+private:
+    char model;
+    float batteryPercentage;
 public:
     Tesla();
     Tesla(char model, int price);
@@ -15,12 +18,10 @@ public:
 
     void chargeBattery(int mins);
     void drive(int kms);
-
-private:
-    char model;
-    float batteryPercentage;
 };
 
 #endif // TESLA_H 
+
+
 
 
