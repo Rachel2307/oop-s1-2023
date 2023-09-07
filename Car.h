@@ -7,6 +7,7 @@ public:
     Car(int price);
 
     int get_price() const;
+    void set_emissions(int emissions);
     int get_emissions() const;
     void set_price(int price);
     virtual void drive(int kms);
