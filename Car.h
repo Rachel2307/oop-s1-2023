@@ -1,21 +1,20 @@
 #ifndef CAR_H
 #define CAR_H
-class Car {
-    private:
-        int price;
-        int emissions;
-    public:
-        // default constructor
-        Car();
-        // creates a Car with a price
-        Car(int price);
-        // set and get price
-        void set_price();
-        int get_price() const;
-        // set and get emissions
-        void set_emissions();
-        int get_emissions() const;
 
-        virtual void drive(int kms) const; 
+class Car {
+public:
+    Car();
+    Car(int price);
+
+    int get_price() const;
+    int get_emissions() const;
+    void set_price(int price);
+    void drive(int kms);
+
+    virtual ~Car(); // Virtual destructor for polymorphism
+private:
+    int price;
+    int emissions;
 };
-#endif
+
+#endif // CAR_H
