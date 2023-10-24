@@ -14,7 +14,7 @@ int main() {
 
     // Display the initial positions of entities
     std::cout << "Initial Entity Positions:" << std::endl;
-    for (GameEntity* entity : game.getEntities()) {
+    for (GameEntity* entity : game.get_entities()) {
         std::tuple<int, int> pos = entity->getPos();
         char type = entity->getType();
         std::cout << "Type: " << type << " Position: (" << std::get<0>(pos) << ", " << std::get<1>(pos) << ")\n";
@@ -25,7 +25,7 @@ int main() {
 
     // Display the final positions of entities
     std::cout << "\nFinal Entity Positions:" << std::endl;
-    for (GameEntity* entity : game.getEntities()) {
+    for (GameEntity* entity : game.get_entities()) {
         std::tuple<int, int> pos = entity->getPos();
         char type = entity->getType();
         std::cout << "Type: " << type << " Position: (" << std::get<0>(pos) << ", " << std::get<1>(pos) << ")\n";

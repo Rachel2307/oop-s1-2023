@@ -14,8 +14,12 @@ private:
 public:
     Game() {}
 
-    std::vector<GameEntity*>& getEntities() {
+    std::vector<GameEntity*>& get_entities() {  // Change this function name
         return entities;
+    }
+
+    void set_entities(std::vector<GameEntity*>& newEntities) {  // Add this function
+        entities = newEntities;
     }
 
     void initGame(int numShips, int numMines, int gridWidth, int gridHeight) {
