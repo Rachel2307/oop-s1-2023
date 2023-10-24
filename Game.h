@@ -35,31 +35,30 @@ public:
     }
 
     void gameLoop(int maxIterations, double mineDistanceThreshold) {
-        for (int iteration = 0; iteration < maxIterations; ++iteration) {
-            // Move all Ship objects
-            for (GameEntity* entity : entities) {
-                if (entity->getType() == 'S') {
-                    Ship* ship = dynamic_cast<Ship*>(entity);
-                    if (ship) {
-                        ship->move(1, 0);
-                    }
+    for (int iteration = 0; iteration < maxIterations; ++iteration) {
+        // Move all Ship objects
+        for (GameEntity* entity : entities) {
+            if (entity->getType() == 'S') {
+                Ship* ship = dynamic_cast<Ship*>(entity);
+                if (ship) {
+                    ship->move(1, 0);
                 }
             }
+        }
 
-            // Check for ship-mine collisions and explode the mines
-            for (GameEntity* entity : entities) {
-                if (entity->getType() == 'M') {
-                    Mine* mine = dynamic_cast<Mine*>(entity);
-                    if (mine) {
-                        for (GameEntity* entity2 : entities) {
-                            if (entity2->getType() == 'S') {
-                                Ship* ship = dynamic_cast<Ship*>(entity2);
-                                if (ship) {
-                                    double distance = Utils::calculateDistance(mine->getPos(), ship->getPos());
-                                    if (distance < mineDistanceThreshold) {
-                                        Explosion explosion = mine->explode();
-                                        ship->setType('X'); // Mark ship as destroyed
-                                    }
+        // Check for ship-mine collisions and explode the mines
+        for (GameEntity* entity : entities) {
+            if (entity->getType() == 'M') {
+                Mine* mine = dynamic_cast<Mine*>(entity);
+                if (mine) {
+                    for (GameEntity* entity2 : entities) {
+                        if (entity2->getType() == 'S') {
+                            Ship* ship = dynamic_cast<Ship*>(entity2);
+                            if (ship) {
+                                double distance = Utils::calculateDistance(mine->getPos(), ship->getPos());
+                                if (distance < mineDistanceThreshold) {
+                                    Explosion explosion = mine->explode();
+                                    ship->setType('X'); // Mark ship as destroyed
                                 }
                             }
                         }
@@ -68,6 +67,8 @@ public:
             }
         }
     }
+}
+
 
     ~Game() {
         for (GameEntity* entity : entities) {
