@@ -9,4 +9,4 @@ public:
     static double calculateDistance(std::tuple<int, int> pos1, std::tuple<int, int> pos2);
 };
 
-#endif
+#endif // UTILS_H

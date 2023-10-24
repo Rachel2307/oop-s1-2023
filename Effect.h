@@ -8,4 +8,4 @@ public:
     virtual void apply(GameEntity& entity) = 0;
 };
 
-#endif
+#endif // EFFECT_H
