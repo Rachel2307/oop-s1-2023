@@ -31,10 +31,5 @@ int main() {
         std::cout << "Type: " << type << " Position: (" << std::get<0>(pos) << ", " << std::get<1>(pos) << ")\n";
     }
 
-    // Clean up and free memory for dynamically allocated entities
-    for (GameEntity* entity : entities) {
-        delete entity;
-    }
-
     return 0;
 }
