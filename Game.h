@@ -57,7 +57,7 @@ public:
                             if (ship) {
                                 double distance = Utils::calculateDistance(mine->getPos(), ship->getPos());
                                 if (distance < mineDistanceThreshold) {
-                                    Explosion explosion = mine->explode();
+                                    mine->explode(); // Apply explosion effect to the mine
                                     ship->setType('X'); // Mark ship as destroyed
                                 }
                             }
