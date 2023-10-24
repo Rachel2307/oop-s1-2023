@@ -1,3 +1,4 @@
+// Game.h
 #ifndef GAME_H
 #define GAME_H
 #include "GameEntity.h"
@@ -13,7 +14,11 @@ private:
 public:
     Game() {}
 
-    std::vector<GameEntity*> initGame(int numShips, int numMines, int gridWidth, int gridHeight) {
+    std::vector<GameEntity*>& getEntities() {
+        return entities;
+    }
+
+    void initGame(int numShips, int numMines, int gridWidth, int gridHeight) {
         entities.clear(); // Clear any existing entities
         for (int i = 0; i < numShips; ++i) {
             std::tuple<int, int> pos = Utils::generateRandomPos(gridWidth, gridHeight);
@@ -23,7 +28,6 @@ public:
             std::tuple<int, int> pos = Utils::generateRandomPos(gridWidth, gridHeight);
             entities.push_back(new Mine(std::get<0>(pos), std::get<1>(pos)));
         }
-        return entities;
     }
 
     void gameLoop(int maxIterations, double mineDistanceThreshold) {
@@ -50,7 +54,7 @@ public:
                                     double distance = Utils::calculateDistance(mine->getPos(), ship->getPos());
                                     if (distance < mineDistanceThreshold) {
                                         Explosion explosion = mine->explode();
-                                        entity2->setType('X'); // Mark ship as destroyed
+                                        ship->setType('X'); // Mark ship as destroyed
                                     }
                                 }
                             }
@@ -61,17 +65,11 @@ public:
         }
     }
 
-    // Destructor to free memory for entities
     ~Game() {
         for (GameEntity* entity : entities) {
-            if (entity->getType() == 'S') {
-                delete dynamic_cast<Ship*>(entity);
-            } else if (entity->getType() == 'M') {
-                delete dynamic_cast<Mine*>(entity);
-            }
+            delete entity;
         }
     }
-
 };
 
 #endif // GAME_H

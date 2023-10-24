@@ -10,11 +10,11 @@ int main() {
     Game game;
 
     // Initialize the game with 2 ships, 3 mines, grid width: 10, grid height: 10
-    std::vector<GameEntity*> entities = game.initGame(2, 3, 10, 10);
+    game.initGame(2, 3, 10, 10);
 
     // Display the initial positions of entities
     std::cout << "Initial Entity Positions:" << std::endl;
-    for (GameEntity* entity : entities) {
+    for (GameEntity* entity : game.getEntities()) {
         std::tuple<int, int> pos = entity->getPos();
         char type = entity->getType();
         std::cout << "Type: " << type << " Position: (" << std::get<0>(pos) << ", " << std::get<1>(pos) << ")\n";
@@ -25,7 +25,7 @@ int main() {
 
     // Display the final positions of entities
     std::cout << "\nFinal Entity Positions:" << std::endl;
-    for (GameEntity* entity : entities) {
+    for (GameEntity* entity : game.getEntities()) {
         std::tuple<int, int> pos = entity->getPos();
         char type = entity->getType();
         std::cout << "Type: " << type << " Position: (" << std::get<0>(pos) << ", " << std::get<1>(pos) << ")\n";
