@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Utils.h"
-
+#include "GameEntity.h"
+#include "Effect.h"
 int main() {
     // Generate random positions
     std::tuple<int, int> pos1 = Utils::generateRandomPos(10, 10);
