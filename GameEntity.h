@@ -24,6 +24,9 @@ public:
 
     // Add a virtual function
     virtual void update() {}
+
+    // Add a virtual destructor
+    virtual ~GameEntity() {}
 };
 
 #endif // GAMEENTITY_H
