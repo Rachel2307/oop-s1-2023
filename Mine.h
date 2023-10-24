@@ -10,6 +10,9 @@ public:
     Explosion explode() {
         return Explosion(std::get<0>(position), std::get<1>(position));
     }
+
+    // Override the update function
+    void update() override {}
 };
 
 #endif // MINE_H

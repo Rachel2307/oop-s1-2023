@@ -17,6 +17,13 @@ public:
     char getType() {
         return type;
     }
+
+    void setType(char newType) {
+        type = newType;
+    }
+
+    // Add a virtual function
+    virtual void update() {}
 };
 
 #endif // GAMEENTITY_H

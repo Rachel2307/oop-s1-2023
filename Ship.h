@@ -11,6 +11,9 @@ public:
         std::get<0>(position) = std::get<0>(currentPosition) + dx;
         std::get<1>(position) = std::get<1>(currentPosition) + dy;
     }
+
+    // Override the update function
+    void update() override {}
 };
 
 #endif // SHIP_H
