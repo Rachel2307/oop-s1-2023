@@ -25,6 +25,10 @@ public:
     void setEntity(char entity) {
         this->entity = entity;
     }
+
+    virtual ~GridUnit() {}
+
+    virtual void doSomething() {}
 };
 
 #endif 
