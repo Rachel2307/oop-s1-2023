@@ -1,7 +1,7 @@
 #ifndef GAMESESSION_H
 #define GAMESESSION_H
-
 #include <vector>
+#include <iostream> 
 #include "GridUnit.h"
 #include "Obstacle.h"
 #include "Avatar.h"
