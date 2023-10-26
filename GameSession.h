@@ -51,7 +51,7 @@ public:
 
                     std::tuple<int, int> coords = avatar->getCoordinates();
                     int x = std::get<0>(coords);
-                    int y = std::get<1>(coords);
+                    //int y = std::get<1>(coords);
                     if (x < 0 || x >= maxCycles) {
                         std::cout << "Avatar has won the game!" << std::endl;
                         return;
