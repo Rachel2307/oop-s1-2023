@@ -14,7 +14,6 @@ public:
         return grid;
     }
 
-    //  initializes the game with a certain number of each object at random positions in the grid.
     void initGameSession(int numAvatars, int numObstacles, int gridWidth, int gridHeight) {
         grid.clear(); // Clear the existing grid units
 
@@ -49,9 +48,10 @@ public:
                         }
                     }
 
+                    // Check if Avatar is outside the grid
                     std::tuple<int, int> coords = avatar->getCoordinates();
                     int x = std::get<0>(coords);
-                    //int y = std::get<1>(coords);
+                    int y = std::get<1>(coords);
                     if (x < 0 || x >= maxCycles) {
                         std::cout << "Avatar has won the game!" << std::endl;
                         return;
