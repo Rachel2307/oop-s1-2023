@@ -7,7 +7,8 @@ public:
     Avatar(int x, int y) : GridUnit(x, y, 'A') {}
 
     void shift(int dx, int dy) {
-        coordinates = std::make_tuple(dx, dy);
+        setCoordinates(dx,dy);
+        //coordinates = std::make_tuple(dx, dy);
     }   
 };
 
