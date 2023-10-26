@@ -1,7 +1,6 @@
 #ifndef GAMESESSION_H
 #define GAMESESSION_H
 
-#include <iostream>
 #include <vector>
 #include "GridUnit.h"
 #include "Obstacle.h"
@@ -13,6 +12,8 @@ private:
     std::vector<GridUnit*> grid;
 
 public:
+    GameSession() {}
+
     std::vector<GridUnit*>& getGrid() {
         return grid;
     }
@@ -35,8 +36,6 @@ public:
 
     void gameCycle(int maxCycles, double obstacleActivationDistance) {
         for (int cycle = 1; cycle <= maxCycles; ++cycle) {
-            std::cout << "Cycle " << cycle << ":" << std::endl;
-
             for (GridUnit* unit : grid) {
                 if (dynamic_cast<Avatar*>(unit)) {
                     Avatar* avatar = dynamic_cast<Avatar*>(unit);
@@ -51,7 +50,6 @@ public:
                         }
                     }
 
-                    // Check if Avatar is outside the grid
                     std::tuple<int, int> coords = avatar->getCoordinates();
                     int x = std::get<0>(coords);
                     int y = std::get<1>(coords);
@@ -65,6 +63,12 @@ public:
             if (cycle == maxCycles) {
                 std::cout << "Maximum number of cycles reached. Game over." << std::endl;
             }
+        }
+    }
+
+    ~GameSession() {
+        for (GridUnit* unit : grid) {
+            delete unit;
         }
     }
 };
