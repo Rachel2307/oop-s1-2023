@@ -13,8 +13,7 @@ class Obstacle : public GridUnit, public Modifier {
             return active;
         }
         void apply(GridUnit& unit) override {
-            unit.setEntity('0');
-            //unit = GridUnit(0, 0, 'O');
+            unit.setEntity('O');
             active = false;
         }
 };
