@@ -1,3 +1,6 @@
+#ifndef GAMESESSION_H
+#define GAMESESSION_H
+
 #include <iostream>
 #include <vector>
 #include "GridUnit.h"
@@ -66,4 +69,4 @@ public:
     }
 };
 
-
+#endif
